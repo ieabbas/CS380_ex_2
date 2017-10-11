@@ -15,15 +15,15 @@
   */
  public class Ex2Client {
 	 
-	 /*
-	  * This is...the main method which performs the general function of the
-	  * class.
-	  */
-	  public static void main(String[]args) {
+	/*
+	 * This is...the main method which performs the general function of the
+	 * class.
+	 */
+	 public static void main(String[]args) {
 		  
-		 // Like everything that isn't guaranteed in life, you have to try
-		 // before giving up
-		 try {
+		// Like everything that isn't guaranteed in life, you have to try
+		// before giving up
+		try {
 			 
 		 }
 	  }
@@ -42,6 +42,21 @@
         } catch (Exception e) { }
 		// This is just to satisfy Java coding conventions for methods
         return false;
+    }
+
+	/*
+	 * This method will cast the CRC as an integer, as it is 4 bytes (Nima)
+	 * and then send the CRC as a byte array
+	 */
+    public static void sendCRC(Socket s, long crc) {
+        try {
+            OutputStream outStr = s.getOutputStream();
+            ByteBuffer b = ByteBuffer.allocate(4);
+            b.putInt( (int) crc);
+            byte[] asArray = b.array();
+            outStr.write(asArray);
+            
+        } catch (Exception e) {}
     }
 	
 	/*
