@@ -33,7 +33,7 @@
 	 * This method will read the response from the server to test
 	 * if the generated CRC code was correct
 	 */
-    public static boolean checkResponse(Socket s) {
+    public static boolean crcCheck(Socket s) {
         try {
             InputStream isStr = s.getInputStream();
             int successCode = is.read();
@@ -43,4 +43,18 @@
 		// This is just to satisfy Java coding conventions for methods
         return false;
     }
+	
+	/*
+	 * This method will create the CRC32 object to generate the CRC code
+	 */
+    public static long createCRC(byte[] b) {
+		long crc;
+        CRC32 newCode = new CRC32();
+        newCode.reset();
+        newCode.update(b, 0, 100);
+        crc = newCode.getValue();
+        System.out.println("\nGenerated CRC32: " + Long.toHexString(crc).toUpperCase() + ".");
+        return crc;
+    }
+	
  }
